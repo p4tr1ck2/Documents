@@ -1,0 +1,109 @@
+0000000000000000000000000000000000000000 cbdd85a0d0b0d8399e75ee88a62958ca82e62c74 Yu7ioi <1943800134@qq.com> 1786888554 +0800	commit (initial): 修复多项BUG并优化性能: 车辆消失/叠车、反作弊指令失效、注册钱丢失、租车不扣钱、killerid数组越界、Nex-AC debug刷屏; 定时器降频与RPC批处理优化; 新增FIXLOG修复记录
+cbdd85a0d0b0d8399e75ee88a62958ca82e62c74 909893090a9193fb250a4bc1a67e0e20a280f713 Yu7ioi <1943800134@qq.com> 1786889577 +0800	commit: 修复租车不扣钱: 两处租车对话框统一扣现金50(移除低等级免费漏洞), 清理悬空else修复pawncc崩溃; FIXLOG补充教训; AGENTS.md新增每次修复必做流程(记录+提交)
+909893090a9193fb250a4bc1a67e0e20a280f713 8eeab2cbf01c2260d423ac3d634cdbf42492340b Yu7ioi <1943800134@qq.com> 1786934546 +0800	commit: 修复carsign/callsign车辆标签: 部门车创建时按车主pCarSign重建标签(ApplyCarSign), 重写/carsign为空参移除/有参更新标签
+8eeab2cbf01c2260d423ac3d634cdbf42492340b 31ade40f16b5e3ea0b38a03871928bb10882ba99 Yu7ioi <1943800134@qq.com> 1786941489 +0800	commit: 初始化工作流：修正 AGENTS.md 编译命令(-i gamemodes)、固化 GB2312+编译+记录+提交流程、补充 git 路径
+31ade40f16b5e3ea0b38a03871928bb10882ba99 391fd02c5a0652d649e446f97403ea97ca1417c6 Yu7ioi <1943800134@qq.com> 1786945114 +0800	commit: 修复拉货时崩溃下线载具消失：个人车交给10分钟反生成定时器，掉线清理拖车状态
+391fd02c5a0652d649e446f97403ea97ca1417c6 92ce3b2a4aec25f34371c1222cbf928c8f1c66b2 Yu7ioi <1943800134@qq.com> 1786948602 +0800	commit: 修复/locations标点定位：11处坐标修正为实际设施位置，无效装货区改为卡文尼卸货区
+92ce3b2a4aec25f34371c1222cbf928c8f1c66b2 a29ea17e0af5de5425b056184220c38284473ce5 Yu7ioi <1943800134@qq.com> 1786951052 +0800	commit: 修复管理员无法看到面具下玩家ID：为每个管理员创建专属可见的真实ID标签，覆盖戴/摘面具、掉线、登录与提升权限场景
+a29ea17e0af5de5425b056184220c38284473ce5 00cb0a046305da23cb71eacdefd99b6a85f147df Yu7ioi <1943800134@qq.com> 1786951695 +0800	commit: 修复倒地/死亡玩家头顶红色状态标签不显示：新增UpdateInjuryLabel并在ReloadFix/UpdateChatBubble接入
+00cb0a046305da23cb71eacdefd99b6a85f147df 1c9aa32d54dd043d826cf3df0c2df3d8cbba3584 Yu7ioi <1943800134@qq.com> 1786952499 +0800	commit: 调整LSPD刷车点阶级限制：拖车改为525且阶级2可用，所有车辆阶级不高于4
+1c9aa32d54dd043d826cf3df0c2df3d8cbba3584 dc54c635fb3118825b55992a1223b77d23be27bb Yu7ioi <1943800134@qq.com> 1786953047 +0800	commit: 调低黑市散弹爆率：散弹合计50%降至24%，多余概率转手枪子弹
+dc54c635fb3118825b55992a1223b77d23be27bb f455ea02af6ea902c4f79189929bf211ec9310d9 Yu7ioi <1943800134@qq.com> 1786954204 +0800	commit: 移植Fantasy_Anti反锁血检测到AntiCheat：服务端扣血验证，三次警告不掉血踢出，管理员预警
+f455ea02af6ea902c4f79189929bf211ec9310d9 f1db02cdc54c0c620c72f3f3ed4d3191af2d713f Yu7ioi <1943800134@qq.com> 1786955652 +0800	commit: 修复惩戒署监狱大门内墙可攀爬越狱：整段内墙栅栏加高至7米不可攀爬
+f1db02cdc54c0c620c72f3f3ed4d3191af2d713f a3afd3964998acbe702b623465dcd9af50a23d95 Yu7ioi <1943800134@qq.com> 1786957612 +0800	commit: 修复登录/注册框有时不弹出：异步回调加IsPlayerConnected保护+LoginTime每8秒兜底重试CheckAccount；进服加速：登录音乐与Souma_LoadPlayerObject延迟3秒执行
+a3afd3964998acbe702b623465dcd9af50a23d95 49ba421e74e95c2bcc6e1028770c8b67fdcfeab4 Yu7ioi <1943800134@qq.com> 1786957817 +0800	commit: 复原原版面具机制：撤销管理员看穿面具真实ID标签改动(MaskAdminTag数组及四处创建/销毁块)，保留hostname修改
+49ba421e74e95c2bcc6e1028770c8b67fdcfeab4 0fb4ec154a09a574c71eedc8f24b5594fcfa46d3 Yu7ioi <1943800134@qq.com> 1786958590 +0800	commit: 补完进服优化：登录音乐延迟3秒真正生效(修复漏执行)；恢复OnPlayerRequestClass原版else结构(移除误插的提前闭合)
+0fb4ec154a09a574c71eedc8f24b5594fcfa46d3 813fb9fae2eb25f0b84960a4d43b609847d1e152 Yu7ioi <1943800134@qq.com> 1786959088 +0800	commit: 修复管理员看穿面具真实ID不显示：新增RefreshMaskAdminTag三stock挂载到玩家身上(offset 0.45避开假名标签)，/mask戴摘自动创建销毁，覆盖管理员登录/掉线/提权降权场景，清理refreshname残缺逻辑
+813fb9fae2eb25f0b84960a4d43b609847d1e152 4be989e9a980715cc6cd429a74f0ed95e3eae1cb Yu7ioi <1943800134@qq.com> 1786960297 +0800	commit: 面具管理员看真实ID改用ShowPlayerNameTagForPlayer原生方案：OnGameModeInit两处ShowNameTags(0)改为(1)使原版OnPlayerStreamIn生效，撤销红色专属标签机制，/mask戴摘即时更新可见性
+4be989e9a980715cc6cd429a74f0ed95e3eae1cb 4f08e0789fd40c2017d4923d3ae0ee9ecdc291ca Yu7ioi <1943800134@qq.com> 1786960980 +0800	commit: 修复ShowNameTags(1)后头顶双标签重复：原生名默认全部隐藏，仅管理员看戴面具玩家时显示真实名字(OnPlayerStreamIn重写+OnPlayerConnect互藏+/mask摘面具恢复隐藏)
+4f08e0789fd40c2017d4923d3ae0ee9ecdc291ca 175916df276e6435c33580792650304a2cef3128 Yu7ioi <1943800134@qq.com> 1787013973 +0800	commit: 服务器资源加载改到登录成功后：删除进服3秒延迟定时器(建筑移除Souma_LoadPlayerObject/登录音乐PlayLoginMusic)，改在OnLoginInit case1登录成功后直接调用
+175916df276e6435c33580792650304a2cef3128 59d596ad664c24999db0d65294ae2664b3427100 Yu7ioi <1943800134@qq.com> 1787014534 +0800	commit: 登录音乐加回选皮肤界面播放(OnPlayerRequestClass延迟3秒)，OnLoginInit仅保留建筑移除
+59d596ad664c24999db0d65294ae2664b3427100 ca92238db9186f76afbc318c2319f26c8b8c9ced Yu7ioi <1943800134@qq.com> 1787015343 +0800	commit: 锁血检测增强：移除防弹衣/车内排除改血量+护甲总和检测，定时器自循环重试继续观察
+ca92238db9186f76afbc318c2319f26c8b8c9ced dc008e1528b4836d696cd0f0618ce0893aa18b21 Yu7ioi <1943800134@qq.com> 1787015406 +0800	commit: 移除误提交的damage.pwn(其他模式BNPC/FCNPC伤害系统代码,未参与编译,文件保留在磁盘)
+dc008e1528b4836d696cd0f0618ce0893aa18b21 0adbabf81e42b958bfc7b16a8a8ae63243f5b909 Yu7ioi <1943800134@qq.com> 1787016519 +0800	commit: 锁血检测终极修复：新增主动扣血探测HM_Probe(每40秒扣5血验证,正常玩家补偿回血无感)，应对setCharProofs免疫+拦截SetPlayerHealth类作弊器(OnPlayerTakeDamage不触发时的唯一可靠检测)
+0adbabf81e42b958bfc7b16a8a8ae63243f5b909 af8bc6ac34a567158bbda3442378fb17c98b3052 Yu7ioi <1943800134@qq.com> 1787016610 +0800	commit: 从版本库排除作弊器参考文件[God-Mode.lua]与damage.pwn(加入.git/info/exclude,磁盘保留)
+af8bc6ac34a567158bbda3442378fb17c98b3052 c46d543a5f61bc121840e00b19b90f6f45ee486d Yu7ioi <1943800134@qq.com> 1787017410 +0800	commit: 武器攻击锁血检测提速：已在检测中时每次受击立即验证计数(2次受击即警告/2次警告即踢)，HM_CheckTick阈值同步3改2
+c46d543a5f61bc121840e00b19b90f6f45ee486d 09d9e62d5be0435e810f2cb334a7deca2c316212 Yu7ioi <1943800134@qq.com> 1787017513 +0800	commit: 修复AntiCheat.pwn编码乱码：从0adbabf恢复GBK版本并重新应用受击即时计数提速修改
+09d9e62d5be0435e810f2cb334a7deca2c316212 e401b116ef3576c49f738c48c6d2990e7dd2c744 Yu7ioi <1943800134@qq.com> 1787019338 +0800	commit: 锁血检测退回0adbabf版本：撤销受击即时计数提速，恢复定时器观察机制
+e401b116ef3576c49f738c48c6d2990e7dd2c744 9b754a1f5f46ecb3ef2013f4dc2d8c6c5f6d6b89 Yu7ioi <1943800134@qq.com> 1787023805 +0800	commit: 修复崩溃重连空中重生：下线保存时车内不保存位置(GetPlayerPos车内返回车辆坐标可能在空中)，保留旧地面位置
+9b754a1f5f46ecb3ef2013f4dc2d8c6c5f6d6b89 3a1aed1fa19e04a3d61d0f01242a11ae0a6cc8e3 Yu7ioi <1943800134@qq.com> 1787054192 +0800	commit: 删除反锁血检测(误判严重)：移除HM_OnDamage/CheckTick/Probe全部代码及3处调用点，保留AQ四元数检测
+3a1aed1fa19e04a3d61d0f01242a11ae0a6cc8e3 b345bd2cb35998aa2e39254e52896aa93191eace Yu7ioi <1943800134@qq.com> 1787063635 +0800	commit: 新增炸车外挂检测(VehicleDestroyed RPC拦截+健康度快照), 更新/report KOOK链接
+b345bd2cb35998aa2e39254e52896aa93191eace f853f791cc4cf20ab82fc5bc0c6132dab38bea1a Yu7ioi <1943800134@qq.com> 1787065141 +0800	commit: 修复炸车检测: RPC钩子格式改为IRPC:207, 载荷按SAMPFUNCS的4字节Int32读取, 加调试日志
+f853f791cc4cf20ab82fc5bc0c6132dab38bea1a 791a928431fd6cb4b58afb2a3ea7d649c8cdb39d Yu7ioi <1943800134@qq.com> 1787065151 +0800	commit: 移除外挂样本与压缩包(不入库)
+791a928431fd6cb4b58afb2a3ea7d649c8cdb39d 97b9e4c268ea26efaf76a18a2b64179eeca35b7f Yu7ioi <1943800134@qq.com> 1787065687 +0800	commit: 炸车检测改OnVehicleDeath兜底: 满血车辆无来源死亡判定+复活车辆+记录嫌疑人, 移除调试日志
+97b9e4c268ea26efaf76a18a2b64179eeca35b7f cc893216d6563141b0d1991497bb6fd67be6aaba Yu7ioi <1943800134@qq.com> 1787066142 +0800	commit: 炸车检测: 放宽判定(去killerid硬条件+武器排除), 加诊断日志定位触发链路
+cc893216d6563141b0d1991497bb6fd67be6aaba 9f4ee5f4ab5fbcdce34b5f639c61fe779dca1545 Yu7ioi <1943800134@qq.com> 1787066688 +0800	commit: 炸车检测实测通过: 移除诊断日志, 保留OnVehicleDeath判定+复活+嫌疑人记录正式版
+9f4ee5f4ab5fbcdce34b5f639c61fe779dca1545 5de1a123f48892cdb7a719624ab3e0bdb21c0375 Yu7ioi <1943800134@qq.com> 1787067104 +0800	commit: 炸车检测增加自动踢出: 优先killerid(伪造RPC发送者), 无效则踢300m内最近玩家
+5de1a123f48892cdb7a719624ab3e0bdb21c0375 d96ea8390e8e6430b5505e16361ca6b521bd1bdd Yu7ioi <1943800134@qq.com> 1787067694 +0800	commit: 炸车踢出增加全服广播提示, 60秒节流防刷屏
+d96ea8390e8e6430b5505e16361ca6b521bd1bdd 05e8a3887910ad3140376d04f8e899b19e3ac035 Yu7ioi <1943800134@qq.com> 1787068548 +0800	commit: 修复车内正常下线重生点不保存: 仅崩溃时车内不保存位置, 正常退出/手动保存照常更新
+05e8a3887910ad3140376d04f8e899b19e3ac035 ffc012e779c9ddd3e5fa2d988649f0c0d27accdd Yu7ioi <1943800134@qq.com> 1787068900 +0800	commit: 修复车辆存车漏洞: SaveVehicleData不再保存位置(X/Y/Z/Angle/World/Interior), 位置仅由/v park保存; 修复自动消失后出生点被改为消失位置
+ffc012e779c9ddd3e5fa2d988649f0c0d27accdd 903ae156ce71f5614e1c4e9bd0d283eebbbf3272 Yu7ioi <1943800134@qq.com> 1787069255 +0800	commit: 修复飞行车辆在空中刷新坠落: 新增IsFlyingVehicleModel判断, 上线加载时空中坐标改为玩家附近地面刷新, OneSecondTimer高空飞行不记录位置
+903ae156ce71f5614e1c4e9bd0d283eebbbf3272 73b40b472fceecb4b0cd90d9f860d15d691da29d Yu7ioi <1943800134@qq.com> 1787069929 +0800	commit: 修复头顶ID标签看不到: testLOS改0不再被墙体遮挡, OneSecondTimer每10秒巡检自动重流化不可见标签
+73b40b472fceecb4b0cd90d9f860d15d691da29d e637e86f85662b7cf64685b15231f864b0c54a22 Yu7ioi <1943800134@qq.com> 1787102330 +0800	commit: 载具四元数反作弊: IPacket:209(InCarSync)数据合法性/伪造包/模异常/原地瞬间转向/卡墙检测 + IPacket:527(UnoccupiedSync)NaN与超范围检测, 参考Fantasy_Anti
+e637e86f85662b7cf64685b15231f864b0c54a22 c58e8510410d231de23465bd2df5babea6b7b15d Yu7ioi <1943800134@qq.com> 1787104342 +0800	commit: 修复重新上线后内饰门口不显示H键提示、按H出不去: H键块新增IntInfo进出检测(与KEY_CTRL_BACK块一致), 进出时同步Interior/World PVar, OnLoginInit按IntEnter/HouseEnter/BizEnter修正重连后interior/world, OneSecondTimer每秒检测门口显示提示
+c58e8510410d231de23465bd2df5babea6b7b15d e637e86f85662b7cf64685b15231f864b0c54a22 Yu7ioi <1943800134@qq.com> 1787104348 +0800	reset: moving to HEAD~1
+e637e86f85662b7cf64685b15231f864b0c54a22 06251c5275e94a387a7b3e0807a82539a4a361d2 Yu7ioi <1943800134@qq.com> 1787104349 +0800	commit: 修复重新上线后内饰门口不显示H键提示、按H出不去: H键块新增IntInfo进出检测(与KEY_CTRL_BACK块一致), 进出时同步Interior/World PVar, OnLoginInit按IntEnter/HouseEnter/BizEnter修正重连后interior/world, OneSecondTimer每秒检测门口显示提示
+06251c5275e94a387a7b3e0807a82539a4a361d2 0248995dc98907e7a35ee345588a742ab6641866 Yu7ioi <1943800134@qq.com> 1787105976 +0800	commit: 加大内饰门口进出检测范围: IntInfo门口检测距离统一加大(Build.pwn 2.0->4.0 四处, Timers.pwn提示 2.5->4.0 两处), 解决站在门口附近不显示按H键离开提示、按H出不去
+0248995dc98907e7a35ee345588a742ab6641866 d83931f4eb885b15590f9dd5ac64e8e760581d4f Yu7ioi <1943800134@qq.com> 1787107667 +0800	commit: 修复 GetCount() 32位毫秒计时溢出(24.8天)导致按键/冷却判断全失效: 改用 gettime() 秒级 + 全部冷却值换算/1000
+d83931f4eb885b15590f9dd5ac64e8e760581d4f 0248995dc98907e7a35ee345588a742ab6641866 Yu7ioi <1943800134@qq.com> 1787107672 +0800	reset: moving to HEAD~1
+0248995dc98907e7a35ee345588a742ab6641866 b0290cd4bf4cd709c7c5e9ed5e1458cabfaf12fa Yu7ioi <1943800134@qq.com> 1787107672 +0800	commit: 修复 GetCount() 32位毫秒计时溢出(24.8天)导致按键/冷却判断全失效: 改用 gettime() 秒级 + 全部冷却值换算/1000
+b0290cd4bf4cd709c7c5e9ed5e1458cabfaf12fa a43af6b269b15a27a599b3fecd610fc74f58e27c Yu7ioi <1943800134@qq.com> 1787108132 +0800	commit: OnLoginInit 重连兜底: 玩家位置落在内饰内部坐标5米内强制恢复 interior/world, 修复幽灵状态下线死循环卡死
+a43af6b269b15a27a599b3fecd610fc74f58e27c b0290cd4bf4cd709c7c5e9ed5e1458cabfaf12fa Yu7ioi <1943800134@qq.com> 1787108138 +0800	reset: moving to HEAD~1
+b0290cd4bf4cd709c7c5e9ed5e1458cabfaf12fa 5bc41a8a66ba886d3605ec51179e643b89839cef Yu7ioi <1943800134@qq.com> 1787108138 +0800	commit: OnLoginInit 重连兜底: 玩家位置落在内饰内部坐标5米内强制恢复 interior/world, 修复幽灵状态下线死循环卡死
+5bc41a8a66ba886d3605ec51179e643b89839cef 2a7bb1767fcbddfd640eb1285523ab1e2136254b Yu7ioi <1943800134@qq.com> 1787110998 +0800	commit: /repaircar 修复血量同时修复电池: vBattery[1]=GetPerkMax(veh,2) + 保存
+2a7bb1767fcbddfd640eb1285523ab1e2136254b 7fa40a709fb3a91b0d444d4765da80f66276bea4 Yu7ioi <1943800134@qq.com> 1787111513 +0800	commit: FIXLOG.md 修复乱码: 恢复 0248995 正确UTF-8版本, 重新按UTF-8追加GetCount修复/OnLoginInit兜底/repaircar电池三条记录
+7fa40a709fb3a91b0d444d4765da80f66276bea4 efa9ca3358ac93a5181853e05a3bb8c61f1864b1 Yu7ioi <1943800134@qq.com> 1787111557 +0800	commit: FIXLOG.md 补充丢失条目: GetCount溢出修复/OnLoginInit兜底/repaircar电池修复 (UTF-8)
+efa9ca3358ac93a5181853e05a3bb8c61f1864b1 337285e097595fb737b834cfad1196a7c7f770af Yu7ioi <1943800134@qq.com> 1787111842 +0800	commit: 修复离线监禁/jailacc无效: 登录读取与保存的Jailtime PVar改为JailTime(大写), 与倒计时/传送逻辑一致
+337285e097595fb737b834cfad1196a7c7f770af 04d1138283a00cd9017ff61c64a679f4912a9761 Yu7ioi <1943800134@qq.com> 1787112701 +0800	commit: 清理调试日志: 移除[GMINIT]/[KEYS]/[HKEY]/[LOGIN]共8行printf, 修复均已验证
+04d1138283a00cd9017ff61c64a679f4912a9761 56f8225b46a5e0916d893fc82e2af03bbf782f00 Yu7ioi <1943800134@qq.com> 1787113184 +0800	commit: /jailacc修复: 公告名字改用本地变量(GetNameWithSpace数组返回为空), UPDATE匹配下划线/空格双名字
+56f8225b46a5e0916d893fc82e2af03bbf782f00 7e12109e8a17f38fc96e9a7ba1a393353a5a1956 Yu7ioi <1943800134@qq.com> 1787113543 +0800	commit: 修复四元数反作弊误判: 全零四元数(模≈0)为上车/车辆生成时数据未就绪, InCarSync与OnFootSync均放行
+7e12109e8a17f38fc96e9a7ba1a393353a5a1956 f74b0d83c6c7cb615ff0ab15cb7724580acf5727 Yu7ioi <1943800134@qq.com> 1787113950 +0800	commit: 四元数反作弊误判率优化: 模异常/转向突变连续3次才踢(120度阈值), 进车3秒豁免, gettime替换GetTickCount修溢出
+f74b0d83c6c7cb615ff0ab15cb7724580acf5727 2a136d83b1b0af1d913e112c86020c96b920778d Yu7ioi <1943800134@qq.com> 1787114786 +0800	commit: 离线监禁排查: jailacc加影响行数反馈回调, 登录/出生链路加JAILDBG日志
+2a136d83b1b0af1d913e112c86020c96b920778d e9398e26db8805ff3c1910d18ed7dddc07b1160d Yu7ioi <1943800134@qq.com> 1787115098 +0800	commit: 修复jailacc根因: sscanf格式串s缺长度致id解析失败UPDATE0行, 改s[25]并打印SQL
+e9398e26db8805ff3c1910d18ed7dddc07b1160d a683b324b10522636de4485dc9f80e11504185c0 Yu7ioi <1943800134@qq.com> 1787116198 +0800	commit: 四元数反作弊按Fantasyland原版重写: InCarSync修正为包ID 200, 209改回UnoccupiedSync, 删除自写误判逻辑
+a683b324b10522636de4485dc9f80e11504185c0 251184d0a557b2a67a8cde5f4ab289ace03da779 Yu7ioi <1943800134@qq.com> 1787117920 +0800	commit: 新增载具垂直速度与位移一致性检测, 抓rvrv.lua Car Fuck垂直甩飞
+251184d0a557b2a67a8cde5f4ab289ace03da779 5153559b5b83e4edea6d20777460c195a36b4525 Yu7ioi <1943800134@qq.com> 1787135600 +0800	commit: 修复玩家移动仍显示AFK: OneSecondTimer新增位置位移检测, 位移>1m即清零AFKTime
+5153559b5b83e4edea6d20777460c195a36b4525 25b915c3556622e0e908766a251499343b0f57be Yu7ioi <1943800134@qq.com> 1787136668 +0800	commit: 删除反千里眼系统: 移除PlayerTags 3D标签/隐藏原生名字逻辑, 面具玩家改为仅对非管理员隐藏真名
+25b915c3556622e0e908766a251499343b0f57be 8f2dcad76ea59a83bcb410fe9525827ee0b5763c Yu7ioi <1943800134@qq.com> 1787137736 +0800	commit: 修复/carsign标签同步: ApplyCarSign不再自动带玩家pCarSign标签, 新刷车辆默认无标签; 补残留标签清理
+8f2dcad76ea59a83bcb410fe9525827ee0b5763c b0294be4d15186bff4ae990fc9357d6a9e2d4c8b Yu7ioi <1943800134@qq.com> 1787138339 +0800	commit: 重写/ban提示: 封禁时全服广播+执行人详细提示, 格式与/tempban一致
+b0294be4d15186bff4ae990fc9357d6a9e2d4c8b 2bdf5f110c2ede1df54b4492e6f4845681f9f5ce Yu7ioi <1943800134@qq.com> 1787138662 +0800	commit: 修改/ban防滥用自动封禁提示为正常文案
+2bdf5f110c2ede1df54b4492e6f4845681f9f5ce 1c1e1a9a53012eee211f682e2bd12fb35564bf2e Yu7ioi <1943800134@qq.com> 1787186992 +0800	commit: 重构登录/注册系统: 查询超时自动重试+出生时强制弹框, 修复登录框偶发不弹出
+1c1e1a9a53012eee211f682e2bd12fb35564bf2e 6cdb1f4bc63fb08b16092085596e0ec2cd30520e Yu7ioi <1943800134@qq.com> 1787187434 +0800	commit: 移植IGTA崩溃玩家指令 /crash (管理员>=11), 适配SA-RP权限体系
+6cdb1f4bc63fb08b16092085596e0ec2cd30520e a0ed6701e5568cb2c5b88d5f6f8b6b33f2f994e7 Yu7ioi <1943800134@qq.com> 1787188783 +0800	commit: 修复登录完成后再次弹出登录框: 新增LoginPending标志防止查询期间出生/超时重复弹框
+a0ed6701e5568cb2c5b88d5f6f8b6b33f2f994e7 8d27c8d97fc9376f9d96d0aeb3dded9534b1e375 Yu7ioi <1943800134@qq.com> 1787189233 +0800	commit: 修复登录/选出生点重生后重复弹登录框: 兜底仅对PlayerLogged==0弹框, 顺带修crash指令笔误
+8d27c8d97fc9376f9d96d0aeb3dded9534b1e375 36c1829b69bc871551443437bd4bf1945cf0384d Yu7ioi <1943800134@qq.com> 1787191406 +0800	commit: 移植GPCI封禁指令 /bangpci (Admin>=11): 入库bans+踢同GPCI玩家, 连接检查加bGPCI匹配
+36c1829b69bc871551443437bd4bf1945cf0384d 65491ce019221e43480deef116276b41c3341aff Yu7ioi <1943800134@qq.com> 1787191785 +0800	commit: /bangpci 不再踢同GPCI的其他在线玩家, 仅封禁被操作玩家
+65491ce019221e43480deef116276b41c3341aff b2ecfa9152cd1c49fa48f429831a001e8f2a2b75 Yu7ioi <1943800134@qq.com> 1787192015 +0800	revert: Revert "/bangpci 不再踢同GPCI的其他在线玩家, 仅封禁被操作玩家"
+b2ecfa9152cd1c49fa48f429831a001e8f2a2b75 cd4ac00bd23afbd0ea5df20b7986a9665fa462f2 Yu7ioi <1943800134@qq.com> 1787192048 +0800	commit: FIXLOG记录回滚 /bangpci 踢同GPCI逻辑
+cd4ac00bd23afbd0ea5df20b7986a9665fa462f2 9d45769708854cfd72332c821ffb98d27e6e28d6 Yu7ioi <1943800134@qq.com> 1787192593 +0800	commit: 修复/bangpci封禁重复入库: 移除BanPlayer双重INSERT, 手动踢出
+9d45769708854cfd72332c821ffb98d27e6e28d6 492ee2fb028e0d75a3b5594d63a4ccd93e454a7f Yu7ioi <1943800134@qq.com> 1787192813 +0800	commit: 封禁提示增加封禁协议说明(IP/账号/机械码GPCI)
+492ee2fb028e0d75a3b5594d63a4ccd93e454a7f e1d72ed7313e0204cef28bdc424d3a6e1275e4ed Yu7ioi <1943800134@qq.com> 1787193579 +0800	commit: 修复封禁不踢人: 补上移植遗漏的KickDelay定义
+e1d72ed7313e0204cef28bdc424d3a6e1275e4ed acf58112974ecdd2099a57fdca8980ae8a0b333b Yu7ioi <1943800134@qq.com> 1787194218 +0800	commit: /bangpci只踢被封玩家本人, 不再误踢同GPCI玩家
+acf58112974ecdd2099a57fdca8980ae8a0b333b 280eaf37b53592fbe43b5fc15c316fd73f133a67 Yu7ioi <1943800134@qq.com> 1787194484 +0800	commit: 重连检查不再按GPCI拦截, 只封账号不误伤同GPCI玩家
+280eaf37b53592fbe43b5fc15c316fd73f133a67 f7108cf93fe38e3026526c89a7f882c9e398fcf8 Yu7ioi <1943800134@qq.com> 1787195414 +0800	commit: 恢复重连GPCI拦截: 换名重连同GPCI也拦截(与istoria2一致)
+f7108cf93fe38e3026526c89a7f882c9e398fcf8 51c0066d20a35aeb88391821123681ba3ff74bc1 Yu7ioi <1943800134@qq.com> 1787196172 +0800	commit: bangpci记录IP+新增/unbangpci+重连检查改IP/账号拦截(含遗留AC改动)
+51c0066d20a35aeb88391821123681ba3ff74bc1 422ace8b0a396c893ce341dc4a7e54924e4072fa Yu7ioi <1943800134@qq.com> 1787196958 +0800	commit: 恢复重连GPCI匹配: 换名重连(同GPCI)被拦, 与istoria2一致
+422ace8b0a396c893ce341dc4a7e54924e4072fa e82b9b69223eb26c4ce5cab748bb994fe7659828 Yu7ioi <1943800134@qq.com> 1787197385 +0800	commit: 修复换名注册新账号绕过GPCI封禁: 注册分支也检查封禁
+e82b9b69223eb26c4ce5cab748bb994fe7659828 e40a11c6b1526fb468dcc3d27732ed53a033aff7 Yu7ioi <1943800134@qq.com> 1787198372 +0800	commit: 删除重连检查的GPCI拦截, 仅按IP/账号匹配
+e40a11c6b1526fb468dcc3d27732ed53a033aff7 46db8b9dd70c306753cff14c38ea017fe6ebf035 Yu7ioi <1943800134@qq.com> 1787199882 +0800	commit: 修复关掉复活发包绕过反作弊: 死亡状态(WASTED)移动检测踢出
+46db8b9dd70c306753cff14c38ea017fe6ebf035 c3b0aee0aebd39065cc2b5e52a834e241f7657c8 Yu7ioi <1943800134@qq.com> 1787241884 +0800	commit: 记录open.mp转换进度(D:\SA-RP_omp): 插件方案确定并验证运行
+c3b0aee0aebd39065cc2b5e52a834e241f7657c8 67dc14f30004971a7b37bc971fdeaf0d9a6ac468 Yu7ioi <1943800134@qq.com> 1787284254 +0800	commit: 初始化工作流脚本: build_and_commit.ps1 + 更新AGENTS.md
+67dc14f30004971a7b37bc971fdeaf0d9a6ac468 d697fdf6985440c18b636d56dc14007cf2fd4d27 Yu7ioi <1943800134@qq.com> 1787284692 +0800	commit: 修复载具重生点不保存(SaveVehicleData缺坐标落库) + 银行H键存取款无响应(KEY_HANDBRAKE缺ATM检测)
+d697fdf6985440c18b636d56dc14007cf2fd4d27 e1d4adbc39cfe61735fb6b765f2d92c8d1882a9a Yu7ioi <1943800134@qq.com> 1787287466 +0800	commit: 修复玩家出生点不保存的bug
+e1d4adbc39cfe61735fb6b765f2d92c8d1882a9a 92ea03ff6d6ee955ab8a14a9f75b6ff22b8c9cc5 Yu7ioi <1943800134@qq.com> 1787288331 +0800	commit: 移植连接冷却(10秒内同IP重连拦截)
+92ea03ff6d6ee955ab8a14a9f75b6ff22b8c9cc5 6d107d4183badbdc3bc039172acecf8f7d2b6e9a Yu7ioi <1943800134@qq.com> 1787289552 +0800	commit: 修复连接冷却不生效: 增加OnPlayerConnect踢出兜底
+6d107d4183badbdc3bc039172acecf8f7d2b6e9a 5b0bce755b4c696b502ccfa72655ff91f4e9d17b Yu7ioi <1943800134@qq.com> 1787290031 +0800	commit: 修复连接冷却仍不生效: OnPlayerConnect保存IP+BlockIpAddress拦截
+5b0bce755b4c696b502ccfa72655ff91f4e9d17b 443ef0b3dbc4d9db22d0d2d8fbfa40023edcc327 Yu7ioi <1943800134@qq.com> 1787290626 +0800	commit: 新增反锁血伤害系统: 服务器追踪血量+定时器验证
+443ef0b3dbc4d9db22d0d2d8fbfa40023edcc327 18182428faf21500d758712e9a3831165fa05620 Yu7ioi <1943800134@qq.com> 1787292627 +0800	commit: 重写反锁血系统v3-主动探测法
+18182428faf21500d758712e9a3831165fa05620 d39b97bc19fd1ef35e123f1be8deac73ec07bfd5 Yu7ioi <1943800134@qq.com> 1787292665 +0800	commit (amend): 重写反锁血系统v3-主动探测法
+d39b97bc19fd1ef35e123f1be8deac73ec07bfd5 b4c6252b233c31cb6e9e3bf7e6314273b8efdd8e Yu7ioi <1943800134@qq.com> 1787293671 +0800	commit: 修复反锁血探测值导致玩家死亡\ -CommitMessage \修复反锁血系统探测值0.0导致玩家死亡
+b4c6252b233c31cb6e9e3bf7e6314273b8efdd8e 92ccab87f96ee58984264a54fbc835fd32d7a18e Yu7ioi <1943800134@qq.com> 1787293704 +0800	commit (amend): 修复反锁血系统探测值0.0导致玩家死亡
+92ccab87f96ee58984264a54fbc835fd32d7a18e 7ec52c4c6a9cecf535d103d0d870275390df52cd Yu7ioi <1943800134@qq.com> 1787296194 +0800	commit: 删除反锁血探测日志, 添加 ac_OnPlayerGiveDamage ALS 钩子双重追踪
+7ec52c4c6a9cecf535d103d0d870275390df52cd 8a7c6da0b84c924be1d5221c96aa17ded9e9f733 Yu7ioi <1943800134@qq.com> 1787297198 +0800	commit: 修复刚进服被踢的问题: g_ServerHealth 旧值残留导致新玩家被误判为锁血作弊
+8a7c6da0b84c924be1d5221c96aa17ded9e9f733 ff25ca423f3606a6941b38162b4656c78f750d14 Yu7ioi <1943800134@qq.com> 1787297360 +0800	revert: Revert "修复刚进服被踢的问题: g_ServerHealth 旧值残留导致新玩家被误判为锁血作弊"
+ff25ca423f3606a6941b38162b4656c78f750d14 fa0f8fa5580feac50420f1fa12c61a8e44443212 Yu7ioi <1943800134@qq.com> 1787297688 +0800	commit: 每个ATM机添加存款功能: 走进ATM显示存款/取款列表
+fa0f8fa5580feac50420f1fa12c61a8e44443212 fcab424b134bb0a8789f6e9527190736ebccae08 Yu7ioi <1943800134@qq.com> 1787298329 +0800	commit: 修复重生后被反锁血系统误踢: OnPlayerSpawn/OnPlayerDisconnect 重置 g_ServerHealth
+fcab424b134bb0a8789f6e9527190736ebccae08 74053bfbb2847a758704e2c138c746cd7d46fee5 Yu7ioi <1943800134@qq.com> 1787298569 +0800	commit: 修复反锁血系统双重扣血导致高误判: 移除 OnPlayerTakeDamage 重复减血
+74053bfbb2847a758704e2c138c746cd7d46fee5 ec5d5db2c9347bcd3d26201fe019ea0746c8c620 Yu7ioi <1943800134@qq.com> 1787325220 +0800	commit: 新增 /givetime 给时间分指令 (2026级权限)
+ec5d5db2c9347bcd3d26201fe019ea0746c8c620 e0b1ecde48a117e675c4cc174e5166c4604388ac Yu7ioi <1943800134@qq.com> 1787328095 +0800	commit: 新增 /fip 查询IP账号指令 (2026级权限)
+e0b1ecde48a117e675c4cc174e5166c4604388ac 071558f3b837270bc7842146df91e0b94fe17f66 Yu7ioi <1943800134@qq.com> 1787328611 +0800	commit: 新增 /ip 查询玩家IP指令 (2026级权限)
